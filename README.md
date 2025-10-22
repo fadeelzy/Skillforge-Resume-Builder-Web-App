@@ -7,19 +7,24 @@ It also features a Job Tracker that connects to a live job API to fetch real-tim
 
 ✅ Dynamic Resume Builder
 
+
 Choose from multiple modern CV templates
 
 Auto-saves and previews user data in real time
 
 Export resumes as PDF using WeasyPrint
 
+
 ✅ User Dashboard
+
 
 View total resumes created
 
 Track resume downloads and profile views
 
+
 ✅ Job Tracker API Integration
+
 
 Fetches live job postings from an external API
 
@@ -27,15 +32,20 @@ Filter jobs by title, location, or company
 
 Click to apply directly from within the web app
 
+
 ✅ Authentication System
+
 
 Secure user sign-up, login, and logout
 
 User-specific resume storage and access
 
+
 ✅ Help & Support Page
 
+
 Built-in support hub for FAQs and assistance
+
 
 🧱 Tech Stack
 
@@ -138,6 +148,7 @@ python manage.py runserver
 
 📦 Exporting Resume as PDF
 
+
 The app uses WeasyPrint to generate beautiful PDF resumes directly from HTML templates:
 
 python manage.py runserver
@@ -153,9 +164,10 @@ For major changes, please open an issue first to discuss what you’d like to mo
 🧑‍💻 Author
 
 Fadilah Abdulkadir
-💼 Backend Developer | Django Enthusiast
-🌐 GitHub
- | ✉️ fadeelzy@gmail.com
+
+💼 Site Reliability Engineer | AWS Cloud Solutions Architect | Backend Developer | Python and Django
+
+📧 [fadeelzy@gmail.com] 🌐 [https://www.linkedin.com/in/fadilah-abdulkadir/]
 
 🪶 License
 
