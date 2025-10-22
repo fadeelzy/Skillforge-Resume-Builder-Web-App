@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - SkillForge</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
+    <meta name="description" content="Manage your resumes, track progress, and access powerful tools in your SkillForge dashboard." />
+<body class="bg-background">
+    <!-- Navigation Header -->
+    <header class="bg-surface shadow-soft sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-auto" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0" y="8" width="24" height="24" rx="4" fill="#1a365d"/>
+                            <rect x="28" y="12" width="16" height="16" rx="2" fill="#319795"/>
+                            <text x="52" y="28" font-family="Poppins, sans-serif" font-size="18" font-weight="600" fill="#1a365d">SkillForge</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="{% url 'homepage' %}"class="text-text-secondary hover:text-primary transition-colors duration-200">Home</a>
+                        <a href="{% url 'template' %}" class="text-text-secondary hover:text-primary transition-colors duration-200">Templates</a>
+                        <a href="{% url 'job_tracker' %}" class="text-text-secondary hover:text-primary transition-colors duration-200">Jobs</a>
+                        <a href="{% url 'userboard' %}" class="text-primary font-medium border-b-2 border-primary pb-1">Dashboard</a>
+                        <a href="{% url 'help' %}" class="text-text-secondary hover:text-primary transition-colors duration-200">Help</a>
+                    </div>
+                </div>
+
+                <!-- User Profile & Actions -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button class="text-text-secondary hover:text-primary transition-colors duration-200 relative">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5-5-5h5v-5a7.5 7.5 0 01-15 0v5z"/>
+                        </svg>
+                    </button>
+                    <div class="flex items-center space-x-3">
+                        <span class="text-text-primary font-medium">{{ user.first_name|default:user.username }}</span>
+                        <button class="text-text-secondary hover:text-primary transition-colors duration-200">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="text-text-secondary hover:text-primary focus:outline-none focus:text-primary transition-colors duration-200" onclick="toggleMobileMenu()">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="md:hidden hidden">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-surface border-t border-gray-200">
+                    <a href="{% url 'homepage' %}" class="block px-3 py-2 text-text-secondary hover:text-primary">Home</a>
+                    <a href="{% url 'template' %}" class="block px-3 py-2 text-text-secondary hover:text-primary">Templates</a>
+                    <a href="{% url 'job_tracker' %}" class="block px-3 py-2 text-text-secondary hover:text-primary">Jobs</a>
+                    <a href="{% url 'userboard' %}" class="block px-3 py-2 text-primary font-medium">Dashboard</a>
+                    <a href="{% url 'help' %}" class="block px-3 py-2 text-text-secondary hover:text-primary">Help</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Dashboard Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Dashboard Header -->
+        <div class="mb-8">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                <div class="mb-4 lg:mb-0">
+                    <h1 class="text-3xl font-bold text-primary mb-2">Welcome back,{{ user.first_name|default:user.username }}!</h1>
+                    <p class="text-text-secondary">Manage your resumes and track your career progress</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <a href="{% url 'template'%}" class="btn-accent">
+                        <svg class="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                        Create New Resume
+                    </a>
+                    <a href="{% url 'template' %}" class="btn-secondary">Browse Templates</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-surface rounded-xl p-6 shadow-soft">
+                <div class="flex items-center">
+                    <div class="p-3 bg-primary-100 rounded-lg">
+                        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-text-secondary text-sm">Total Resumes</p>
+                        <p class="text-2xl font-bold text-primary">{{ total_resumes }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-surface rounded-xl p-6 shadow-soft">
+                <div class="flex items-center">
+                    <div class="p-3 bg-secondary-100 rounded-lg">
+                        <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-text-secondary text-sm">Profile Views</p>
+                        <p class="text-2xl font-bold text-secondary">{{ views }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-surface rounded-xl p-6 shadow-soft">
+                <div class="flex items-center">
+                    <div class="p-3 bg-accent-100 rounded-lg">
+                        <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-text-secondary text-sm">Downloads</p>
+                        <p class="text-2xl font-bold text-accent">{{ downloads }}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Main Dashboard Grid -->
+        <div class="grid lg:grid-cols-3 gap-8">
+            <!-- Projects Section -->
+            <div class="lg:col-span-2">
+                <!-- Project Filters -->
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
+                    <h2 class="text-xl font-semibold text-primary mb-4 sm:mb-0">My Projects</h2>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center space-x-2">
+                            <button class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium">All Projects</button>
+                            <button class="px-4 py-2 bg-gray-100 text-text-secondary rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors duration-200">Recent</button>
+                            <button class="px-4 py-2 bg-gray-100 text-text-secondary rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors duration-200">Shared</button>
+                        </div>
+                        <button class="text-text-secondary hover:text-primary transition-colors duration-200">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Projects Grid -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    {% for resume in resumes %}
+                    <div class="bg-surface rounded-xl shadow-soft overflow-hidden group hover:shadow-elevated transition-all duration-300">
+                        <div class="h-48 bg-gradient-to-br from-primary-100 to-secondary-100 relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=1000&auto=format&fit=crop" alt="Resume Preview" class="w-full h-full object-cover opacity-80" onerror="this.src='https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1000'; this.onerror=null;" />
+                            <div class="absolute top-4 right-4">
+                                <span class="bg-success text-white text-xs px-2 py-1 rounded-full">Active</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-semibold text-primary mb-2">{{ resume.name|default:"Untitled Resume" }}</h3>
+                            <p class="text-text-secondary text-sm mb-4"> Last modified: {{ resume.updated_at|date:"M d, Y" }}</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2 text-xs text-text-secondary">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                    <span>{{ resume.view_count|default:0 }}</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <a href="{% url 'resume_builder' resume.template.id %}" class="p-2 hover:text-primary" title="Edit">✏️</a>
+                                    <a href="{% url 'export_pdf' resume.id %}" class="p-2 hover:text-accent" title="Download">⬇️</a>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                           <p class="text-text-secondary">You don’t have any resumes yet. <a href="{% url 'template' %}" class="text-primary underline">Create one</a></p>
+                        {% endfor %}
+                    </div>
+
+            </div>
+
+            <!-- Sidebar -->
+            <div class="space-y-6">
+                <!-- Analytics Card -->
+                <div class="bg-surface rounded-xl p-6 shadow-soft">
+                    <h3 class="text-lg font-semibold text-primary mb-4">Analytics Overview</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-text-secondary">This Week</span>
+                            <span class="text-primary font-semibold"></span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-primary h-2 rounded-full" style="width: 75%"></div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <p class="text-text-secondary">Views</p>
+                                <p class="font-semibold text-primary">{{ views }}</p>
+                            </div>
+                            <div>
+                                <p class="text-text-secondary">Downloads</p>
+                                <p class="font-semibold text-secondary">{{ downloads }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-primary-900 text-white py-16 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <svg class="h-8 w-auto mr-3" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0" y="8" width="24" height="24" rx="4" fill="white"/>
+                            <rect x="28" y="12" width="16" height="16" rx="2" fill="#319795"/>
+                            <text x="52" y="28" font-family="Poppins, sans-serif" font-size="18" font-weight="600" fill="white">SkillForge</text>
+                        </svg>
+                    </div>
+                    <p class="text-white/80 mb-6 max-w-md">
+                        Empowering professionals to tell their stories beautifully through innovative resume and portfolio building tools.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="javascript:void(0)" class="text-white/60 hover:text-white transition-colors duration-200">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </a>
+                        <a href="javascript:void(0)" class="text-white/60 hover:text-white transition-colors duration-200">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        <a href="javascript:void(0)" class="text-white/60 hover:text-white transition-colors duration-200">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-semibold mb-4">Product</h4>
+                    <ul class="space-y-2 text-white/80">
+                        <li><a href="{% url 'template' %}"class="hover:text-white transition-colors duration-200">Templates</a></li>
+                        <li><a href="{% url 'template' %}" class="hover:text-white transition-colors duration-200">Resume Builder</a></li>
+                        <li><a href="{% url 'job_tracker' %}" class="hover:text-white transition-colors duration-200">Jobs</a></li>
+                        <li><a href="{% url 'userboard' %}" class="hover:text-white transition-colors duration-200">Dashboard</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h4 class="font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-white/80">
+                        <li><a href="help_support_center.html" class="hover:text-white transition-colors duration-200">Help Center</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/20 mt-12 pt-8 text-center text-white/60">
+                <p>&copy; 2025 SkillForge. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Add interactive functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filter buttons functionality
+            const filterButtons = document.querySelectorAll('button[class*="bg-primary"], button[class*="bg-gray-100"]');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active state from all buttons
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('bg-primary', 'text-white');
+                        btn.classList.add('bg-gray-100', 'text-text-secondary');
+                    });
+                    
+                    // Add active state to clicked button
+                    this.classList.remove('bg-gray-100', 'text-text-secondary');
+                    this.classList.add('bg-primary', 'text-white');
+                });
+            });
+
+            // Project card hover effects
+            const projectCards = document.querySelectorAll('.group');
+            projectCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-4px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Quick action buttons
+            const quickActionButtons = document.querySelectorAll('button[class*="hover:bg-gray-50"]');
+            quickActionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.querySelector('span').textContent;
+                    console.log(`Quick action clicked: ${action}`);
+                    // Add your action logic here
+                });
+            });
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

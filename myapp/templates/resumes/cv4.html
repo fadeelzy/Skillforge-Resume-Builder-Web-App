@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Builder-4</title>
+  <style>
+    body { font-family: Verdana, sans-serif; background: #eee; padding: 30px; }
+    .resume { background: white; padding: 40px; max-width: 850px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.15); }
+    h1 { font-size: 32px; color: #333; margin-bottom: 5px; }
+    h2 { font-size: 18px; margin-top: 25px; color: #666; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+    p { font-size: 14px; line-height: 1.7; color: #333; margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <div class="resume">
+    <h1>{{ resume.name }}</h1>
+    <p><strong>{{ resume.job_title }}</strong></p>
+    <p>
+      {{ resume.email }} | {{ resume.phone }} | {{ resume.address }} | {{ resume.linkedin }}
+    </p>
+
+    <h2>Executive Profile</h2>
+    <p>{{ resume.summary }}</p>
+
+    <h2>Career Experience</h2>
+    <p>{{ resume.experience }}</p>
+
+    <h2>Education</h2>
+    <p>{{ resume.education }}</p>
+
+    <h2>Leadership Skills</h2>
+    <p>{{ resume.skills }}</p>
+  </div>
+</body>
+</html>
+

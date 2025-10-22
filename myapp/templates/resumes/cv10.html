@@ -1,0 +1,37 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Builder-10</title>
+  <style>
+    body { margin: 0; font-family: "Orbitron", sans-serif; background: white; color: #eee; }
+    .resume { max-width: 900px; margin: 40px auto; padding: 40px; background: white; border: 3px solid black; border-radius: 10px; }
+    h1 { margin: 0; font-size: 36px; color: #0ff; text-transform: uppercase; }
+    h2 { margin-top: 25px; color: #0ff; border-bottom: 1px solid #444; padding-bottom: 5px; }
+    p { font-size: 14px; line-height: 1.6; color: #ddd; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <div class="resume">
+    <h1>{{ resume.name }}</h1>
+    <p><strong>{{ resume.job_title }}<strong/></p>
+    <p>{{ resume.email }}</p>
+    <p>{{ resume.phone }}</p>
+    <p>{{ resume.address }}</p>
+    <p>{{ resume.linkedin }}</p>
+    <p>{{ resume.github }}</p>
+
+    <h2>Creative Vision</h2>
+    <p>{{ resume.summary }}</p>
+
+    <h2>Experience</h2>
+    <p>{{ resume.experience }}</p>
+
+    <h2>Education</h2>
+    <p>{{ resume.education }}</p>
+
+    <h2>Innovation Skills</h2>
+    <p>{{ resume.skills }}</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Resume Builder-13</title>
+<style>
+  body { margin: 0; background: #fff; color: #111; font: 15px/1.6 "Nunito Sans", system-ui; }
+  .wrap { max-width: 900px; margin: 40px auto; padding: 40px; border: 1px solid #ddd; border-radius: 10px; }
+  h1 { font-size: 28px; margin-bottom: 8px; }
+  h2 { font-size: 14px; text-transform: uppercase; letter-spacing: .1em; margin: 24px 0 10px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+  .field { margin: 6px 0 14px; }
+  .row { display: flex; gap: 12px; }
+  .row .field { flex: 1; }
+  .multiline { white-space: pre-line; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>{{ resume.name }}</h1>
+      <div class="field">{{ resume.job_title }}</div>
+      <div class="field">{{ resume.address }}</div>
+      <div class="field">{{ resume.email }}</div>
+      <div class="field">{{ resume.phone }}</div>
+      <div class="field">{{ resume.github }}</div>
+      <div class="field">{{ resume.linkedin }}</div>
+    </header>
+
+    <section>
+      <h2>Professional Summary</h2>
+      <div class="field multiline">{{ resume.summary }}</div>
+    </section>
+
+    <section>
+      <h2>Experience</h2>
+      <div class="field multiline">{{ resume.experience }}</div>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+      <div class="field multiline">{{ resume.projects }}</div>
+    </section>
+
+    <section>
+      <h2>Tech & Skills</h2>
+      <div class="field multiline">{{ resume.skills }}</div>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <div class="field multiline">{{ resume.education }}</div>
+    </section>
+
+    <section>
+      <h2>Certifications</h2>
+      <div class="field multiline">{{ resume.certifications }}</div>
+    </section>
+  </div>
+</body>
+</html>

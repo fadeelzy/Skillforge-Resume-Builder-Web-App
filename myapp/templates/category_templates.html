@@ -1,0 +1,98 @@
+{% extends "template.html" %}
+
+{% block content %}
+<section class="py-16 bg-background">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Category Tabs -->
+    <div class="flex justify-center space-x-8 mb-12 border-b border-gray-200">
+      <a href="{% url 'category_templates' 'executive' %}" 
+         class="inline-block px-2 pb-2 {% if category == 'executive' %}border-b-2 border-[#4741a6] text-[#4741a6] font-semibold{% else %}text-gray-600 hover:text-[#4741a6]{% endif %}">
+        Executive
+      </a>
+      <a href="{% url 'category_templates' 'creative' %}" 
+         class="inline-block px-2 pb-2 {% if category == 'creative' %}border-b-2 border-[#4741a6] text-[#4741a6] font-semibold{% else %}text-gray-600 hover:text-[#4741a6]{% endif %}">
+        Creative
+      </a>
+      <a href="{% url 'category_templates' 'technical' %}" 
+         class="inline-block px-2 pb-2 {% if category == 'technical' %}border-b-2 border-[#4741a6] text-[#4741a6] font-semibold{% else %}text-gray-600 hover:text-[#4741a6]{% endif %}">
+        Technical
+      </a>
+      <a href="{% url 'category_templates' 'academic' %}" 
+         class="inline-block px-2 pb-2 {% if category == 'academic' %}border-b-2 border-[#4741a6] text-[#4741a6] font-semibold{% else %}text-gray-600 hover:text-[#4741a6]{% endif %}">
+        Academic
+      </a>
+    </div>
+
+    <!-- Templates Header -->
+    <div class="flex justify-between items-center mb-8">
+      <div>
+        <h2 class="text-2xl font-bold text-primary">{{ category|title }} Templates</h2>
+        <p class="text-text-secondary" id="templateCount">
+          Showing {{ templates|length }} templates
+        </p>
+      </div>
+      <div class="flex items-center space-x-4">
+        <button class="text-text-secondary hover:text-primary transition-colors duration-200" onclick="toggleView('grid')" id="gridView">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+          </svg>
+        </button>
+        <button class="text-primary" onclick="toggleView('masonry')" id="masonryView">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Templates Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {% for template in templates %}
+      <div class="template-card group cursor-pointer"
+           data-category="{{ template.category|lower }}"
+           onclick="window.location.href='{% url 'resumebuilder' template.id %}'">
+
+        <div class="bg-surface rounded-xl overflow-hidden shadow-soft group-hover:shadow-elevated transition-all duration-300 transform group-hover:-translate-y-2">
+          <div class="relative">
+            <img src="https://picsum.photos/400/300?random={{ template.id }}"
+                 alt="{{ template.name }}"
+                 class="w-full h-56 object-cover"
+                 onerror="this.src='https://via.placeholder.com/400x300'; this.onerror=null;" />
+
+            <div class="absolute top-3 right-3">
+              <button class="favorite-btn bg-white/90 p-2 rounded-full hover:bg-white transition-colors duration-200">
+                <svg class="w-4 h-4 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                </svg>
+              </button>
+            </div>
+
+            <div class="absolute inset-0 bg-secondary/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <div class="text-center text-white">
+                <p class="font-medium mb-2">{{ template.name }}</p>
+                <span class="bg-white/20 px-2 py-1 rounded text-xs">{{ template.category }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4">
+            <h3 class="font-semibold text-primary mb-2">{{ template.name }}</h3>
+            <p class="text-text-secondary text-sm mb-3">
+              Professionally designed {{ template.category }} template
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-text-secondary">Popular choice</span>
+              <a href="{% url 'resumebuilder' template.id %}" class="btn-accent text-xs px-3 py-1 rounded">Use</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <p class="text-center text-text-secondary col-span-3">No templates available.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

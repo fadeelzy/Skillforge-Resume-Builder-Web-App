@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> Resume Builder-16</title>
+  <style>
+    body { margin: 0; font-family: "Times New Roman", serif; background: #fff; color: #333; }
+    .resume { max-width: 900px; margin: 40px auto; padding: 40px; border: 1px solid #ccc; }
+    h1 { font-size: 32px; font-weight: bold; text-align: center; margin: 0; }
+    h2 { font-size: 20px; margin-top: 25px; border-bottom: 1px solid #999; }
+    p, div { font-size: 14px; line-height: 1.6; margin: 8px 0; }
+    .inline-info { text-align: center; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <div class="resume">
+
+      <!-- Name -->
+      <h1>{{ resume.name|default:"Full Name" }}</h1>
+
+      <!-- Contact Info -->
+      <p class="inline-info">
+        {{ resume.job_title|default:"Job Title" }} |
+        {{ resume.email|default:"email@example.com" }} |
+        {{ resume.phone|default:"+123456789" }} |
+        {{ resume.address|default:"Your Address" }} |
+        <a href="{{ resume.linkedin }}">{{ resume.linkedin }}</a>
+      </p>
+
+      <!-- Education -->
+      <h2>Education</h2>
+      <div>{{ resume.education|default:"Enter education details (degree, institution, year)" }}</div>
+
+      <!-- Research Interests -->
+      <h2>Research Interests</h2>
+      <div>{{ resume.summary|default:"Add your research interests here." }}</div>
+
+      <!-- Publications -->
+      <h2>Publications</h2>
+      <div>{{ resume.publication|default:"List your publications (authors, year, title, journal)" }}</div>
+
+      <!-- Teaching Experience -->
+      <h2>Teaching Experience</h2>
+      <div>{{ resume.experience|default:"List teaching roles (role, institution, year)" }}</div>
+
+      <!-- Awards -->
+      <h2>Awards & Scholarships</h2>
+      <div>{{ resume.awards|default:"List your awards & scholarships" }}</div>
+
+  </div>
+</body>
+</html>

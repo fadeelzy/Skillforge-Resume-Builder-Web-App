@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Builder-20</title>
+  <style>
+    body { margin: 0; font-family: "Montserrat", sans-serif; background: #eef3f7; }
+    .resume { max-width: 950px; margin: 40px auto; background: #fff; padding: 50px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    h1 { font-size: 32px; margin: 0; color: #2c3e50; }
+    h2 { margin-top: 25px; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 5px; }
+    .meta { margin: 10px 0 25px; color: #555; }
+    .meta span { display: inline-block; margin-right: 16px; }
+    .section { margin-bottom: 20px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <div class="resume">
+
+    <!-- Header -->
+    <h1>{{ resume.name|default:"Full Name" }}</h1>
+    <div class="meta">
+      <span>{{ resume.job_title|default:"Job Title" }}</span>
+      <span>{{ resume.email|default:"Email" }}</span>
+      <span>{{ resume.phone|default:"Phone" }}</span>
+      <span>{{ resume.address|default:"Address" }}</span>
+      {% if resume.linkedin %}
+        <span><a href="{{ resume.linkedin }}" target="_blank">{{ resume.linkedin }}</a></span>
+      {% endif %}
+    </div>
+
+    <!-- Education -->
+    <h2>Education</h2>
+    <div class="section">
+      {{ resume.education|default:"Add your education" }}
+    </div>
+
+    <!-- Research Interests -->
+    <h2>Research Interests</h2>
+    <div class="section">
+      {{ resume.summary|default:"Add your research interests" }}
+    </div>
+
+    <!-- Publications -->
+    <h2>Publications</h2>
+    <div class="section">
+      {{ resume.publication|default:"List your publications" }}
+    </div>
+
+    <!-- Conferences -->
+    <h2>Conferences</h2>
+    <div class="section">
+      {{ resume.conference|default:"Add conferences" }}
+    </div>
+
+    <!-- Awards -->
+    <h2>Awards</h2>
+    <div class="section">
+      {{ resume.awards|default:"Awards & Scholarships" }}
+    </div>
+
+  </div>
+</body>
+</html>

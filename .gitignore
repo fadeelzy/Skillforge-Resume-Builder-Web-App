@@ -1,0 +1,89 @@
+# ==========================================
+# Python & Django
+# ==========================================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pdb
+*.tmp
+*.log
+*.pot
+*.mo
+*.so
+
+# SQLite database
+db.sqlite3
+db.sqlite3-journal
+
+# Django static and media
+/static/
+/media/
+/staticfiles/
+/collectstatic/
+
+# Environment variables
+.env
+.env.*
+*.env
+
+# Virtual environment folders
+venv/
+venv.bak/
+.env/
+Scripts/
+bin/
+Include/
+Lib/
+pyvenv.cfg
+
+# Editor & IDE configs
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Backup and package files
+*.bak
+*.swp
+*.zip
+*.tar.gz
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Node / Tailwind (if you used Tailwind CSS CLI or npm)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Cache and temporary files
+*.cache/
+*.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.pytest_cache/
+__snapshots__/
+.cache/
+
+# WeasyPrint / Temporary PDF output
+*.pdf
+/tmp/
+temp/
+
+# Logs
+logs/
+*.log
+
+# ==========================================
+# End of .gitignore
+# ==========================================

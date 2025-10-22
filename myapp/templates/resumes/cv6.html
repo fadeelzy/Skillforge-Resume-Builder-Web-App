@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Builder-6</title>
+  <style>
+    body { margin: 0; font-family: "Montserrat", sans-serif; background: #eef3f7; }
+    .resume { max-width: 950px; margin: 40px auto; background: #fff; padding: 50px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    h1 { font-size: 32px; margin: 0; color: #2c3e50; }
+    h2 { margin-top: 25px; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 5px; }
+    p { font-size: 15px; line-height: 1.7; margin: 5px 0; color: #333; }
+  </style>
+</head>
+<body>
+  <div class="resume">
+    <h1>{{ resume.name }}</h1>
+    <p><strong>{{ resume.job_title }}</strong></p>
+    <p>
+      {{ resume.email }} | {{ resume.phone }} | {{ resume.address }} | {{ resume.linkedin }}
+    </p>
+
+    <h2>Education</h2>
+    <p>{{ resume.education }}</p>
+
+    <h2>Research Interests</h2>
+    <p>{{ resume.summary }}</p>
+
+    <h2>Publications</h2>
+    <p>{{ resume.publication }}</p>
+
+    <h2>Conferences</h2>
+    <p>{{ resume.conferences }}</p>
+
+    <h2>Awards</h2>
+    <p>{{ resume.awards }}</p>
+  </div>
+</body>
+</html>

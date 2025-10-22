@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Builder-7</title>
+  <style>
+    body { margin: 0; font-family: "Montserrat", sans-serif; }
+    .resume { display: grid; grid-template-columns: 250px 1fr; min-height: 100vh; }
+    .sidebar { background: #222; color: #fff; padding: 30px; }
+    .sidebar h2 { border-bottom: 1px solid #444; margin-top: 20px; }
+    .main { padding: 40px; background: #f4f4f4; }
+    h1 { margin: 0; font-size: 28px; color: #fff; }
+    h2 { margin-top: 20px; color: gray }
+    p { font-size: 14px; line-height: 1.6; margin: 6px 0; }
+  </style>
+</head>
+<body>
+  <div class="resume">
+    <div class="sidebar">
+      <h1>{{ resume.name }}</h1>
+      <p><strong>{{ resume.job_title }}</strong></p>
+      <p>{{ resume.email }}</p>
+      <p>{{ resume.phone }}</p>
+      <p>{{ resume.address }}</p>
+      <p>{{ resume.linkedin }}</p>
+      <p>{{ resume.portfolio }}</p>
+
+      <h2>Skills</h2>
+      <p>{{ resume.skills }}</p>
+
+      <h2>Education</h2>
+      <p>{{ resume.education }}</p>
+    </div>
+
+    <div class="main">
+      <h2>Profile</h2>
+      <p>{{ resume.summary }}</p>
+
+      <h2>Work Experience</h2>
+      <p>{{ resume.experience }}</p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Builder-9</title>
+  <style>
+    body { background: #fdfdfd; font-family: "Roboto", sans-serif; margin: 0; }
+    .resume { max-width: 850px; margin: 40px auto; background: #fff; padding: 40px; border: 6px double #ff4081; }
+    h1 { margin: 0; font-size: 32px; color: #ff4081; }
+    h2 { margin-top: 25px; font-size: 18px; border-bottom: 2px dashed #ff4081; padding-bottom: 5px; color: #444; }
+    p { font-size: 14px; line-height: 1.7; margin: 8px 0; }
+    .info p { margin: 4px 0; }
+  </style>
+</head>
+<body>
+  <div class="resume">
+    <h1>{{ resume.name }}</h1>
+    <div class="info">
+      <p><strong>{{ resume.job_title }}</strong></p>
+      <p>Email: {{ resume.email }}</p>
+      <p>Phone: {{ resume.phone }}</p>
+      <p>Address: {{ resume.address }}</p>
+      <p>LinkedIn: {{ resume.linkedin }}</p>
+      <p>Portfolio: {{ resume.portfolio }}</p>
+    </div>
+
+    <h2>Creative Statement</h2>
+    <p>{{ resume.summary }}</p>
+
+    <h2>Experience</h2>
+    <p>{{ resume.experience }}</p>
+
+    <h2>Education</h2>
+    <p>{{ resume.education }}</p>
+
+    <h2>Artistic Skills</h2>
+    <p>{{ resume.skills }}</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Resume Builder-12</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font: 15px/1.6 "Georgia", serif; color: #111; background: #fff; }
+  .wrap { max-width: 900px; margin: 40px auto; padding: 40px; border: 1px solid #ddd; }
+  header { margin-bottom: 30px; }
+  h1 { font-size: 28px; margin-bottom: 10px; }
+  .grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; }
+  h2 { font-size: 14px; text-transform: uppercase; letter-spacing: .08em; margin: 20px 0 10px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+
+  /* Read-only styling */
+  .field { margin: 6px 0 12px; padding: 6px 0; }
+  .multiline { white-space: pre-line; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>{{ resume.name }}</h1>
+      <div class="field">{{ resume.job_title }}</div>
+      <div class="field">{{ resume.address }}</div>
+      <div class="field">{{ resume.email }}</div>
+      <div class="field">{{ resume.phone }}</div>
+      <div class="field">{{ resume.github }}</div>
+      <div class="field">{{ resume.linkedin }}</div>
+    </header>
+
+    <div class="grid">
+      <section>
+        <h2>Profile</h2>
+        <div class="field multiline">{{ resume.summary }}</div>
+
+        <h2>Experience</h2>
+        <div class="field multiline">{{ resume.experience }}</div>
+
+        <h2>Projects</h2>
+        <div class="field multiline">{{ resume.projects }}</div>
+      </section>
+
+      <aside>
+        <h2>Tech Stack</h2>
+        <div class="field">{{ resume.tech_stack }}</div>
+
+        <h2>Skills</h2>
+        <div class="field">{{ resume.skills }}</div>
+
+        <h2>Education</h2>
+        <div class="field multiline">{{ resume.education }}</div>
+
+        <h2>Certifications</h2>
+        <div class="field multiline">{{ resume.certifications }}</div>
+
+        <h2>Highlights</h2>
+        <div class="field multiline">{{ resume.highlights }}</div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

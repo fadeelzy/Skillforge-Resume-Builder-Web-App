@@ -1,0 +1,644 @@
+<!DOCTYPE html> 
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume Builder - SkillForge</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
+    <meta name="description" content="Create professional resumes with SkillForge's interactive builder. Real-time preview, ATS optimization, and industry-specific guidance." />
+</head>
+<body class="bg-background">
+
+    <!-- Navigation Header -->
+    <header class="bg-surface shadow-soft sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-auto" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0" y="8" width="24" height="24" rx="4" fill="#1a365d"/>
+                            <rect x="28" y="12" width="16" height="16" rx="2" fill="#319795"/>
+                            <text x="52" y="28" font-family="Poppins, sans-serif" font-size="18" font-weight="600" fill="#1a365d">SkillForge</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="{% url 'homepage' %}" class="text-text-secondary hover:text-primary transition-colors duration-200">Home</a>
+                        <a href="{% url 'template' %}" class="text-text-secondary hover:text-primary transition-colors duration-200">Templates</a>
+                        <a href="{% url 'job_tracker' %}" class="text-text-secondary hover:text-primary transition-colors duration-200">Jobs</a>
+                        <a href="{% url 'help' %}" class="text-text-secondary hover:text-primary transition-colors duration-200">Help</a>
+                    </div>
+                </div>
+
+                <!-- User Actions -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button onclick="saveResume()" class="flex items-center text-text-secondary hover:text-primary transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3-3m0 0l-3 3m3-3v12"/>
+                        </svg>
+                        Save
+                    </button>
+                    <a href="{% url 'export_pdf' resume.id %}" class="save-btn">Download PDF</a>
+                    <a href="{% url 'userboard' %}" class="text-primary hover:text-primary-700 font-medium transition-colors duration-200">Dashboard</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="text-text-secondary hover:text-primary focus:outline-none focus:text-primary transition-colors duration-200" onclick="toggleMobileMenu()">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="md:hidden hidden">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-surface border-t border-gray-200">
+                    <a href="{% url 'homepage' %}" class="block px-3 py-2 text-text-secondary hover:text-primary">Home</a>
+                    <a href="{% url 'template' %}" class="block px-3 py-2 text-text-secondary hover:text-primary">Templates</a>
+                    <a href="{% url 'job_tracker' %}" class="block px-3 py-2 text-text-secondary hover:text-primary">Jobs</a>
+                    <a href="{% url 'help' %}" class="block px-3 py-2 text-text-secondary hover:text-primary">Help</a>
+                    <div class="px-3 py-2 space-y-2">
+                        <button onclick="saveResume()" class="block w-full text-left py-2 text-text-secondary">Save Resume</button>
+                        <button onclick="exportResume()" class="block w-full text-center btn-accent">Export PDF</button>
+                        <a href="{% url 'userboard' %}" class="block w-full text-center py-2 text-primary font-medium">Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Auto-save Indicator -->
+    <div id="autosave-indicator" class="fixed top-20 right-4 z-40 bg-success text-white px-4 py-2 rounded-lg shadow-elevated opacity-0 transition-opacity duration-300">
+        <div class="flex items-center">
+            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            Auto-saved
+        </div>
+    </div>
+
+    <!-- Resume Builder Layout -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+        <!-- Form Section -->
+        <section>
+            <h1 class="text-2xl font-bold mb-4">Edit Resume</h1>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="space-y-4">
+                    {% if template.template_file == "resumes/cv1.html" %}
+                          <!-- Fields for CV1-->
+                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
+                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
+
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                  
+                    {% elif template.template_file == "resumes/cv2.html" %}
+                          <!-- Fields for CV2-->
+                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
+                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
+                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
+
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                  
+                    {% elif template.template_file == "resumes/cv3.html" %}
+                          <!-- Fields for CV3-->
+                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
+                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                  
+                    {% elif template.template_file == "resumes/cv4.html" %}
+                          <!-- Fields for CV4-->
+                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
+                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                  
+                    {% elif template.template_file == "resumes/cv5.html" %}
+                          <!-- Fields for CV5-->
+                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
+                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                  
+                    {% elif template.template_file == "resumes/cv6.html" %}
+                        <!-- fields for CV6-->
+                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
+                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
+                        <textarea name="publication" rows="10" placeholder="Publications" class="textarea">{{ resume.publication }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
+                        <textarea name="awards" rows="10" placeholder="Awards" class="textarea">{{ resume.awards }}</textarea>
+                        <textarea name="conference" rows="10" placeholder="Conferences" class="textarea">{{ resume.conference }}</textarea>
+                   
+                    {% elif template.template_file == "resumes/cv7.html" %}
+                        <!-- Fields for CV7-->
+                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
+                        <input type="text" name="portfolio" value="{{ resume.portfolio }}" placeholder="PORTFOLIO URL" class="input" />
+                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                    
+                    {% elif template.template_file == "resumes/cv8.html" %}
+                        <!-- Fields for CV8-->
+                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
+                        <input type="text" name="portfolio" value="{{ resume.portfolio }}" placeholder="PORTFOLIO URL" class="input" />
+                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                    {% elif template.template_file == "resumes/cv9.html" %}
+                        <!-- Fields for CV9-->
+                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
+                        <input type="text" name="portfolio" value="{{ resume.portfolio }}" placeholder="PORTFOLIO URL" class="input" />
+                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                    {% elif template.template_file == "resumes/cv10.html" %}
+                        <!-- Fields for CV10-->
+                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
+                        <input type="text" name="github" value="{{ resume.github }}" placeholder="GITHUB URL" class="input" />
+                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                     
+                    {% elif template.template_file == "resumes/cv11.html" %}
+                        <!-- Fields for CV11-->
+                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
+                        <input type="text" name="portfolio" value="{{ resume.portfolio }}" placeholder="PORTFOLIO URL" class="input" />
+                        <input type="text" name="github" value="{{ resume.github }}" placeholder="GITHUB URL" class="input" />
+                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
+                        <textarea name="tech_stack" rows="10" placeholder="Tech Stack" class="textarea">{{ resume.tech_stack }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
+                        <textarea name="projects" rows="10" placeholder="Projects" class="textarea">{{ resume.projects }}</textarea><textarea name="skills" rows="4" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <textarea name="certifications" rows="10" placeholder="Certifications" class="textarea">{{ resume.certifications }}</textarea>
+                        <textarea name="highlights" rows="10" placeholder="Highlights" class="textarea">{{ resume.highlights }}</textarea>
+                    {% elif template.template_file == "resumes/cv12.html" %}
+                        <!-- Fields for CV12-->
+                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
+                        <input type="text" name="github" value="{{ resume.github }}" placeholder="GITHUB URL" class="input" />
+                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
+                        <textarea name="tech_stack" rows="10" placeholder="Tech Stack" class="textarea">{{ resume.tech_stack }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
+                        <textarea name="projects" rows="10" placeholder="Projects" class="textarea">{{ resume.projects }}</textarea><textarea name="skills" rows="4" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <textarea name="certifications" rows="10" placeholder="Certifications" class="textarea">{{ resume.certifications }}</textarea>
+                        <textarea name="highlights" rows="10" placeholder="Highlights" class="textarea">{{ resume.highlights }}</textarea>
+                    {% elif template.template_file == "resumes/cv13.html" %}
+                        <!-- Fields for CV13-->
+                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
+                        <input type="text" name="github" value="{{ resume.github }}" placeholder="GITHUB URL" class="input" />
+                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
+                        <textarea name="projects" rows="10" placeholder="Projects" class="textarea">{{ resume.projects }}</textarea><textarea name="skills" rows="4" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <textarea name="certifications" rows="10" placeholder="Certifications" class="textarea">{{ resume.certifications }}</textarea>
+                    {% elif template.template_file == "resumes/cv14.html" %}
+                        <!-- Fields for CV14-->
+                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
+                        <input type="text" name="portfolio" value="{{ resume.portfolio }}" placeholder="PORTFOLIO URL" class="input" />
+                        <input type="text" name="github" value="{{ resume.github }}" placeholder="GITHUB URL" class="input" />
+                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
+                        <textarea name="tech_stack" rows="10" placeholder="Tech Stack" class="textarea">{{ resume.tech_stack }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
+                        <textarea name="projects" rows="10" placeholder="Projects" class="textarea">{{ resume.projects }}</textarea><textarea name="skills" rows="4" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <textarea name="certifications" rows="10" placeholder="Certifications" class="textarea">{{ resume.certifications }}</textarea>
+                        <textarea name="highlights" rows="10" placeholder="Highlights" class="textarea">{{ resume.highlights }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                     
+                    {% elif template.template_file == "resumes/cv15.html" %}
+                        <!-- Fields for CV15-->
+                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
+                        <input type="text" name="github" value="{{ resume.github }}" placeholder="GITHUB URL" class="input" />
+                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
+                        <textarea name="projects" rows="10" placeholder="Projects" class="textarea">{{ resume.projects }}</textarea><textarea name="skills" rows="4" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <textarea name="certifications" rows="10" placeholder="Certifications" class="textarea">{{ resume.certifications }}</textarea>
+                    
+                    {% elif template.template_file == "resumes/cv16.html" %}
+                        <!-- Fields for CV16-->
+                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
+                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
+                        <textarea name="awards" rows="10" placeholder="Awards" class="textarea">{{ resume.awards }}</textarea>
+                        <textarea name="publication" rows="10" placeholder="Publications" class="textarea">{{ resume.publication }}</textarea>
+                    
+                    {% elif template.template_file == "resumes/cv17.html" %}
+                        <!-- Fields for CV17-->
+                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
+                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
+                        <textarea name="awards" rows="10" placeholder="Awards" class="textarea">{{ resume.awards }}</textarea>
+                        <textarea name="publication" rows="10" placeholder="Publications" class="textarea">{{ resume.publication }}</textarea>
+                    {% elif template.template_file == "resumes/cv18.html" %}
+                        <!-- Fields for CV18-->
+                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
+                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
+                        <textarea name="projects" rows="10" placeholder="Projects" class="textarea">{{ resume.projects }}</textarea>
+                        <textarea name="conference" rows="10" placeholder="Conferences" class="textarea">{{ resume.conference }}</textarea>
+                        <textarea name="awards" rows="10" placeholder="Awards" class="textarea">{{ resume.awards }}</textarea>
+                        <textarea name="publication" rows="10" placeholder="Publications" class="textarea">{{ resume.publication }}</textarea>
+                    
+                    {% elif template.template_file == "resumes/cv19.html" %}
+                        <!-- Fields for CV19-->
+                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
+                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <textarea name="publication" rows="10" placeholder="Publications" class="textarea">{{ resume.publication }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
+                        <textarea name="awards" rows="10" placeholder="Awards" class="textarea">{{ resume.awards }}</textarea>
+                    {% elif template.template_file == "resumes/cv20.html" %}
+                        <!-- Fields for CV20-->
+                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
+                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
+                        <textarea name="publication" rows="10" placeholder="Publications" class="textarea">{{ resume.publication }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
+                        <textarea name="awards" rows="10" placeholder="Awards" class="textarea">{{ resume.awards }}</textarea>
+                        <textarea name="conference" rows="10" placeholder="Conferences" class="textarea">{{ resume.conference }}</textarea>
+
+                    {% endif %}
+                    <div class="flex space-x-4">
+                        <button type="submit" name="action" value="save" class="btn-primary">Save Changes</button>
+                        <button type="submit" name="action" value="preview" class="btn-secondary">Save & Preview</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <!-- Preview Section -->
+        <section>
+            <h1 class="text-2xl font-bold mb-4">Preview</h1>
+            <div id="resume-preview" class="border p-4 bg-white rounded-lg shadow">
+                {% if preview %}
+                    {% include template.template_file with resume=resume %}
+                {% else %}
+                    <p class="text-gray-500">Fill in the form and click <b>Save & Preview</b> to see your resume here.</p>
+                {% endif %}
+            </div>
+            <div class="mt-4 flex space-x-4">
+                <a href="{% url 'export_pdf' resume.id %}" class="save-btn">Download PDF</a>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+        function saveResume() {
+            document.querySelector('form').submit();
+            showAutosaveIndicator();
+        }
+        function exportResume() {
+            alert('Export to PDF functionality will go here.');
+        }
+        function showAutosaveIndicator() {
+            const indicator = document.getElementById('autosave-indicator');
+            indicator.classList.remove('opacity-0');
+            setTimeout(() => indicator.classList.add('opacity-0'), 2000);
+        }
+    </script>
+</body>
+</html>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Auto-save functionality
+        let autoSaveTimeout;
+        function triggerAutoSave() {
+            clearTimeout(autoSaveTimeout);
+            autoSaveTimeout = setTimeout(() => {
+                const indicator = document.getElementById('autosave-indicator');
+                indicator.classList.remove('opacity-0');
+                setTimeout(() => {
+                    indicator.classList.add('opacity-0');
+                }, 2000);
+            }, 1000);
+        }
+
+        // Update preview content
+        function updatePreview(section, content) {
+            const previewElement = document.getElementById(`preview-${section}`);
+            if (previewElement) {
+                previewElement.textContent = content;
+            }
+            triggerAutoSave();
+        }
+
+        // Industry guidance updates
+        function updateIndustryGuidance(industry) {
+            const guidance = document.getElementById('industry-guidance');
+            const guidanceContent = {
+                'technology': {
+                    title: 'Technology Industry Tips',
+                    content: 'Include technical keywords like "agile," "scalable," "API," and specific programming languages. Quantify your impact with metrics like performance improvements and user growth.'
+                },
+                'marketing': {
+                    title: 'Marketing Industry Tips',
+                    content: 'Highlight campaign results, ROI improvements, and brand awareness metrics. Include keywords like "conversion optimization," "brand strategy," and "customer acquisition."'
+                },
+                'finance': {
+                    title: 'Finance Industry Tips',
+                    content: 'Emphasize analytical skills, risk management, and regulatory compliance. Use terms like "financial modeling," "portfolio management," and "regulatory compliance."'
+                },
+                'creative': {
+                    title: 'Creative Industry Tips',
+                    content: 'Showcase your creative process, client satisfaction, and project outcomes. Include keywords like "brand identity," "user experience," and "creative direction."'
+                }
+            };
+
+            if (guidanceContent[industry]) {
+                const content = guidanceContent[industry];
+                guidance.innerHTML = `
+                    <div class="flex items-start">
+                        <svg class="w-5 h-5 text-secondary mr-3 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                        </svg>
+                        <div>
+                            <h4 class="font-medium text-secondary mb-1">${content.title}</h4>
+                            <p class="text-sm text-text-secondary">${content.content}</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Apply smart suggestions
+        function applySuggestion(section, suggestion) {
+            const textarea = document.querySelector(`textarea`);
+            if (textarea) {
+                const currentValue = textarea.value;
+                const newValue = currentValue + (currentValue ? ' ' : '') + suggestion;
+                textarea.value = newValue;
+                updatePreview(section, newValue);
+            }
+        }
+
+        // Section navigation
+        function switchSection(section) {
+            // Update active section styling
+            document.querySelectorAll('button[onclick^="switchSection"]').forEach(btn => {
+                btn.className = btn.className.replace('bg-primary-50 text-primary', 'hover:bg-gray-50 text-text-secondary');
+                btn.className = btn.className.replace('bg-secondary-50 text-secondary', 'hover:bg-gray-50 text-text-secondary');
+            });
+            
+            // Highlight active section
+            event.target.className = event.target.className.replace('hover:bg-gray-50 text-text-secondary', 'bg-secondary-50 text-secondary');
+        }
+
+        function previousSection() {
+            // Navigate to previous form section
+            console.log('Navigate to previous section');
+        }
+
+        function nextSection() {
+            // Navigate to next form section
+            console.log('Navigate to next section');
+        }
+
+        // Device switching
+        function switchDevice(device) {
+            const buttons = document.querySelectorAll('button[onclick^="switchDevice"]');
+            buttons.forEach(btn => {
+                btn.className = btn.className.replace('bg-primary text-white', 'text-text-secondary hover:bg-gray-100');
+            });
+            
+            event.target.className = event.target.className.replace('text-text-secondary hover:bg-gray-100', 'bg-primary text-white');
+            
+            const preview = document.getElementById('resume-preview');
+            if (device === 'tablet') {
+                preview.style.maxWidth = '768px';
+            } else if (device === 'mobile') {
+                preview.style.maxWidth = '375px';
+            } else {
+                preview.style.maxWidth = '1024px';
+            }
+        }
+
+        // Zoom controls
+        function zoomIn() {
+            const preview = document.getElementById('resume-preview');
+            const currentScale = preview.style.transform.match(/scale\(([\d.]+)\)/);
+            const scale = currentScale ? parseFloat(currentScale[1]) : 1;
+            const newScale = Math.min(scale + 0.1, 2);
+            preview.style.transform = `scale(${newScale})`;
+        }
+
+        function zoomOut() {
+            const preview = document.getElementById('resume-preview');
+            const currentScale = preview.style.transform.match(/scale\(([\d.]+)\)/);
+            const scale = currentScale ? parseFloat(currentScale[1]) : 1;
+            const newScale = Math.max(scale - 0.1, 0.5);
+            preview.style.transform = `scale(${newScale})`;
+        }
+
+        // Template switching
+        function switchTemplate(template) {
+            // Update active template styling
+            document.querySelectorAll('div[onclick^="switchTemplate"]').forEach(div => {
+                const innerDiv = div.querySelector('div');
+                innerDiv.className = innerDiv.className.replace('border-2 border-primary bg-primary-50', 'border border-gray-200 hover:border-secondary');
+                innerDiv.className = innerDiv.className.replace('border-2 border-secondary bg-secondary-50', 'border border-gray-200 hover:border-secondary');
+                innerDiv.className = innerDiv.className.replace('border-2 border-accent bg-accent-50', 'border border-gray-200 hover:border-accent');
+                
+                const badge = innerDiv.querySelector('span');
+                if (badge && badge.textContent === 'Current') {
+                    badge.textContent = 'Switch Template';
+                    badge.className = 'text-xs text-secondary';
+                }
+            });
+            
+            // Highlight selected template
+            const selectedDiv = event.currentTarget.querySelector('div');
+            if (template === 'executive') {
+                selectedDiv.className = selectedDiv.className.replace('border border-gray-200 hover:border-secondary', 'border-2 border-primary bg-primary-50');
+            } else if (template === 'creative') {
+                selectedDiv.className = selectedDiv.className.replace('border border-gray-200 hover:border-secondary', 'border-2 border-secondary bg-secondary-50');
+            } else if (template === 'modern') {
+                selectedDiv.className = selectedDiv.className.replace('border border-gray-200 hover:border-accent', 'border-2 border-accent bg-accent-50');
+            }
+            
+            const badge = selectedDiv.querySelector('span');
+            if (badge) {
+                badge.textContent = 'Current';
+                badge.className = 'text-xs bg-primary text-white px-2 py-1 rounded';
+            }
+            
+            console.log(`Switched to ${template} template`);
+        }
+
+        // Template filtering
+        function filterTemplates(category) {
+            // Update active filter
+            document.querySelectorAll('button[onclick^="filterTemplates"]').forEach(btn => {
+                btn.className = btn.className.replace('bg-primary text-white', 'bg-gray-100 text-text-secondary hover:bg-gray-200');
+            });
+            
+            event.target.className = event.target.className.replace('bg-gray-100 text-text-secondary hover:bg-gray-200', 'bg-primary text-white');
+            
+            console.log(`Filtered templates by: ${category}`);
+        }
+
+        // Export and save functions
+        function saveResume() {
+            triggerAutoSave();
+            console.log('Resume saved');
+        }
+
+        function exportResume() {
+            console.log('Exporting resume as PDF');
+            // Simulate PDF export
+            const link = document.createElement('a');
+            link.download = 'Jessica_Smith_Resume.pdf';
+            link.click();
+        }
+
+        // Version history modal
+        function openVersionModal() {
+            document.getElementById('version-modal').classList.remove('hidden');
+        }
+
+        function closeVersionModal() {
+            document.getElementById('version-modal').classList.add('hidden');
+        }
+
+        // Initialize auto-save on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up auto-save for all form inputs
+            document.querySelectorAll('input, textarea, select').forEach(element => {
+                element.addEventListener('input', triggerAutoSave);
+            });
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

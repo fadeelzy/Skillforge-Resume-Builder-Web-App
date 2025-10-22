@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template Gallery - SkillForge</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <meta name="description" content="Browse SkillForge's curated collection of professional resume templates. Filter by industry, style, and experience level to find your perfect design." />
+</head>
+<body class="bg-background">
+    <!-- Navigation Header -->
+    <header class="bg-surface shadow-soft sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-auto" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0" y="8" width="24" height="24" rx="4" fill="#1a365d"/>
+                            <rect x="28" y="12" width="16" height="16" rx="2" fill="#319795"/>
+                            <text x="52" y="28" font-family="Poppins, sans-serif" font-size="18" font-weight="600" fill="#1a365d">SkillForge</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="{% url 'homepage' %}"   class="text-text-secondary hover:text-primary transition-colors duration-200">Home</a>
+                        <a href="{% url 'template' %}"  class="text-primary font-medium border-b-2 border-primary pb-1">Templates</a>
+                        <a href="{% url 'job_tracker' %}"   class="text-text-secondary hover:text-primary transition-colors duration-200">Jobs</a>
+                        <a href="{% url 'help' %}"   class="text-text-secondary hover:text-primary transition-colors duration-200">Help</a>
+                    </div>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="{% url 'userboard' %}"   class="text-primary hover:text-primary-700 font-medium transition-colors duration-200">Dashboard</a>
+                    <a href="{% url 'template' %}"   class="btn-accent">Start Building Free</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="text-text-secondary hover:text-primary focus:outline-none focus:text-primary transition-colors duration-200" onclick="toggleMobileMenu()">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="md:hidden hidden">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-surface border-t border-gray-200">
+                    <a href="{% url 'homepage' %}"   class="block px-3 py-2 text-text-secondary hover:text-primary">Home</a>
+                    <a href="{% url 'template' %}"   class="block px-3 py-2 text-primary font-medium">Templates</a>
+                    <a href="{% url 'job_tracker' %}"   class="block px-3 py-2 text-text-secondary hover:text-primary">Jobs</a>
+                    <a href="{% url 'help' %}"   class="block px-3 py-2 text-text-secondary hover:text-primary">Help</a>
+                    <div class="px-3 py-2 space-y-2">
+                        <a href="{% url 'userboard' %}"   class="block w-full text-center py-2 text-primary font-medium">Dashboard</a>
+                        <a href="{% url 'template' %}"   class="block w-full text-center btn-accent">Start Building Free</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-primary-50 to-secondary-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl lg:text-5xl font-bold text-primary mb-6">
+                    Professional Resume Templates
+                </h1>
+                <p class="text-xl text-text-secondary mb-8 max-w-3xl mx-auto">
+                    Choose from our curated collection of ATS-optimized templates designed by professionals, for professionals. Each template is crafted to help you stand out and get noticed.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Template Spotlight -->
+    <section class="py-16 bg-surface">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-primary mb-4">Customizable Templates</h2>
+                <p class="text-lg text-text-secondary">Our templates are editable</p>
+            </div>
+            
+            <div class="bg-gradient-to-br from-accent-50 to-secondary-50 rounded-2xl p-8 lg:p-12">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <p class="text-text-secondary mb-6">
+                            Flexible designs built to adapt to your career story. Edit sections, highlight skills, and personalize the layout to match your goals.
+                        </p>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center text-sm text-text-secondary">
+                                <svg class="w-5 h-5 text-success mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                Works across industries
+                            </div>
+                            <div class="flex items-center text-sm text-text-secondary">
+                                <svg class="w-5 h-5 text-success mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                Professional yet flexible
+                            </div>
+                            <div class="flex items-center text-sm text-text-secondary">
+                                <svg class="w-5 h-5 text-success mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                Fully editable content
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <p class="text-text-secondary mb-6">
+                               <i class="fa-solid fa-arrow-down"></i> Scroll down to see available templates <i class="fa-solid fa-arrow-down"></i>
+                            </p>    
+                    </div>
+                    
+                </div>
+            </div> 
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="py-8 bg-primary-50 sticky top-16 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap gap-4 items-center justify-between">
+                <!-- Industry Filter -->
+                <div id="categories" class="flex flex-wrap gap-2">
+                       <a href="{% url 'category_templates' 'technical' %}#categories" 
+                          class="px-4 py-2 rounded-full border transition-all duration-200 
+                          {% if category == 'technical' %}bg-[#4741a6] text-white border-[#4741a6]{% else %}bg-white text-gray-600 border-gray-300 hover:bg-[#4741a6]/10 hover:border-[#4741a6]{% endif %}">
+                           Technology
+                        </a>
+
+                        <a href="{% url 'category_templates' 'academic' %}#categories" 
+                           class="px-4 py-2 rounded-full border transition-all duration-200 
+                           {% if category == 'academic' %}bg-[#4741a6] text-white border-[#4741a6]{% else %}bg-white text-gray-600 border-gray-300 hover:bg-[#4741a6]/10 hover:border-[#4741a6]{% endif %}">
+                            Academic
+                        </a>
+
+                        <a href="{% url 'category_templates' 'creative' %}#categories" 
+                           class="px-4 py-2 rounded-full border transition-all duration-200 
+                           {% if category == 'creative' %}bg-[#4741a6] text-white border-[#4741a6]{% else %}bg-white text-gray-600 border-gray-300 hover:bg-[#4741a6]/10 hover:border-[#4741a6]{% endif %}">
+                            Creative
+                        </a>
+
+                        <a href="{% url 'category_templates' 'executive' %}#categories" 
+                           class="px-4 py-2 rounded-full border transition-all duration-200 
+                           {% if category == 'executive' %}bg-[#4741a6] text-white border-[#4741a6]{% else %}bg-white text-gray-600 border-gray-300 hover:bg-[#4741a6]/10 hover:border-[#4741a6]{% endif %}">
+                            Executive
+                        </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Templates Grid -->
+    <section class="py-16 bg-background">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h2 class="text-2xl font-bold text-primary">Browse Templates</h2>
+                    <p class="text-text-secondary" id="templateCount">Showing 20 of 20 templates</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-text-secondary hover:text-primary transition-colors duration-200" onclick="toggleView('grid')" id="gridView">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                        </svg>
+                    </button>
+                    <button class="text-primary" onclick="toggleView('masonry')" id="masonryView">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Templates Masonry Grid -->
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {% for template in templates %}
+    <div class="template-card group cursor-pointer"
+         data-category="{{ template.category|lower }}"
+         onclick="window.location.href='{% url 'resume_builder' template.id %}'">
+
+        <div class="bg-surface rounded-xl overflow-hidden shadow-soft group-hover:shadow-elevated transition-all duration-300 transform group-hover:-translate-y-2">
+            <div class="relative">
+                <img src="https://picsum.photos/400/300?random={{ template.id }}"
+                     alt="{{ template.name }}"
+                     class="w-full h-56 object-cover"
+                     onerror="this.src='https://via.placeholder.com/400x300'; this.onerror=null;" />
+
+                <div class="absolute top-3 right-3">
+                    <button class="favorite-btn bg-white/90 p-2 rounded-full hover:bg-white transition-colors duration-200">
+                        <svg class="w-4 h-4 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="absolute inset-0 bg-secondary/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div class="text-center text-white">
+                        <p class="font-medium mb-2">{{ template.name }}</p>
+                        <span class="bg-white/20 px-2 py-1 rounded text-xs">{{ template.category }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4">
+                <h3 class="font-semibold text-primary mb-2">{{ template.name }}</h3>
+                <p class="text-text-secondary text-sm mb-3">
+                    Professionally designed {{ template.category }} template
+                </p>
+                <div class="flex items-center justify-between">
+                    <span class="text-xs text-text-secondary">Popular choice</span>
+                    <a href="{% url 'resume_builder' template.id %}" class="btn-accent text-xs px-3 py-1 rounded">Use</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-center text-text-secondary col-span-3">No templates available.</p>
+    {% endfor %}
+</div>
+    
+
+
+    <script>
+        function toggleMobileMenu() {
+              mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        function filterTemplates(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            const templates = document.querySelectorAll('.template-card');
+            
+            // Update active button
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === category) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Filter templates
+            templates.forEach(template => {
+                if (category === 'all' || template.dataset.category === category) {
+                    template.style.display = 'block';
+                } else {
+                    template.style.display = 'none';
+                }
+            });
+
+            updateTemplateCount();
+        }
+
+        function filterByStyle() {
+            const styleFilter = document.getElementById('styleFilter').value;
+            const templates = document.querySelectorAll('.template-card');
+            
+            templates.forEach(template => {
+                if (!styleFilter || template.dataset.style === styleFilter) {
+                    template.style.display = 'block';
+                } else {
+                    template.style.display = 'none';
+                }
+            });
+
+            updateTemplateCount();
+        }
+
+        function filterByLevel() {
+            const levelFilter = document.getElementById('levelFilter').value;
+            const templates = document.querySelectorAll('.template-card');
+            
+            templates.forEach(template => {
+                if (!levelFilter || template.dataset.level === levelFilter) {
+                    template.style.display = 'block';
+                } else {
+                    template.style.display = 'none';
+                }
+            });
+
+            updateTemplateCount();
+        }
+
+        function resetFilters() {
+            // Reset all filters
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+            document.getElementById('styleFilter').value = '';
+            document.getElementById('levelFilter').value = '';
+            document.getElementById('templateSearch').value = '';
+            
+            // Show all templates
+            document.querySelectorAll('.template-card').forEach(template => {
+                template.style.display = 'block';
+            });
+
+            updateTemplateCount();
+        }
+
+        function updateTemplateCount() {
+            const visibleTemplates = document.querySelectorAll('.template-card[style="display: block"], .template-card:not([style*="display: none"])').length;
+            document.getElementById('templateCount').textContent = `Showing ${visibleTemplates} of 48 templates`;
+        }
+
+        function toggleFavorite(event, templateId) {
+            event.stopPropagation();
+            const button = event.currentTarget;
+            const icon = button.querySelector('svg');
+            
+            // Toggle favorite state
+            if (icon.getAttribute('fill') === 'none') {
+                icon.setAttribute('fill', 'currentColor');
+                icon.classList.add('text-accent');
+                // Save to favorites (localStorage or API call)
+                console.log('Added to favorites:', templateId);
+            } else {
+                icon.setAttribute('fill', 'none');
+                icon.classList.remove('text-accent');
+                // Remove from favorites
+                console.log('Removed from favorites:', templateId);
+            }
+        }
+
+        function selectTemplate(templateId) {
+            // Redirect to resume builder with selected template
+            window.location.href = `resume_builder_application.html?template=${templateId}`;
+        }
+
+        function previewTemplate(templateId) {
+            // Open template preview modal or new window
+            console.log('Preview template:', templateId);
+            // Implementation would show a larger preview
+        }
+
+        function toggleView(viewType) {
+            const gridView = document.getElementById('gridView');
+            const masonryView = document.getElementById('masonryView');
+            const grid = document.getElementById('templatesGrid');
+            
+            if (viewType === 'grid') {
+                gridView.classList.add('text-primary');
+                masonryView.classList.remove('text-primary');
+                masonryView.classList.add('text-text-secondary');
+                grid.className = 'grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6';
+            } else {
+                masonryView.classList.add('text-primary');
+                gridView.classList.remove('text-primary');
+                gridView.classList.add('text-text-secondary');
+                grid.className = 'columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6';
+            }
+        }
+
+        function loadMoreTemplates() {
+            // Simulate loading more templates
+            console.log('Loading more templates...');
+            // Implementation would load additional templates via API
+        }
+
+        // Search functionality
+        document.getElementById('templateSearch').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const templates = document.querySelectorAll('.template-card');
+            
+            templates.forEach(template => {
+                const title = template.querySelector('h3').textContent.toLowerCase();
+                const description = template.querySelector('p').textContent.toLowerCase();
+                const category = template.dataset.category.toLowerCase();
+                const style = template.dataset.style.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm) || 
+                    category.includes(searchTerm) || style.includes(searchTerm)) {
+                    template.style.display = 'block';
+                } else {
+                    template.style.display = 'none';
+                }
+            });
+
+            updateTemplateCount();
+        });
+
+        // Add CSS for filter buttons
+        const style = document.createElement('style');
+        style.textContent = `
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                background-color: #f7fafc;
+                color: #718096;
+                border-radius: 9999px;
+                font-weight: 500;
+                transition: all 0.2s;
+                border: none;
+                cursor: pointer;
+            }
+            .filter-btn:hover {
+                background-color: #e2e8f0;
+                color: #2d3748;
+            }
+            .filter-btn.active {
+                background-color: #1a365d;
+                color: white;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize template count
+        updateTemplateCount();
+    </script>
+    <script>
+        // Save position before reload
+        window.addEventListener("beforeunload", function () {
+            localStorage.setItem("scrollY", window.scrollY);
+        });
+        
+        // Restore after reload
+        window.addEventListener("load", function () {
+            if (localStorage.getItem("scrollY") !== null) {
+                window.scrollTo(0, localStorage.getItem("scrollY"));
+                localStorage.removeItem("scrollY"); // clear after use
+            }
+        });
+        </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

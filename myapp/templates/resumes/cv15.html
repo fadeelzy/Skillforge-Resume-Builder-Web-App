@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Resume Builder-15</title>
+<style>
+  :root{--bg:#ffffff;--ink:#0f172a;--muted:#64748b;--accent:#7c3aed;--line:#e2e8f0}
+  body{margin:0;background:#f8fafc;color:var(--ink);font:15px/1.65 "Inter",system-ui}
+  .wrap{max-width:980px;margin:40px auto;background:var(--bg);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+  header{padding:28px 36px;background:linear-gradient(180deg,#faf5ff,#ffffff)}
+  h1{margin:0;font-size:30px}
+  .meta{color:var(--muted)}
+  .meta a{color:#2563eb;text-decoration:none}
+  .col{padding:24px 36px}
+  h2{margin:0 0 12px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#475569}
+  .card{border:1px solid var(--line);border-radius:14px;padding:16px;margin:14px 0;background:#fff}
+  .bar{height:6px;background:#e2e8f0;border-radius:6px;overflow:hidden;margin-top:6px}
+  .bar span{display:block;height:100%;background:var(--accent);width:{{ resume.skill_level|default:"72" }}%}
+</style>
+</head>
+<body>
+  <div class="wrap">
+      <header>
+        <h1>{{ resume.name|default:"Your Name" }}</h1>
+        <div class="meta">
+          {{ resume.job_title|default:"Job Title" }} <br>
+          {{ resume.address|default:"Your Address" }} <br>
+          {{ resume.email|default:"email@example.com" }} <br>
+          {{ resume.phone|default:"+123 456 7890" }} <br>
+          <a href="{{ resume.github }}">{{ resume.github }}</a> <br>
+          <a href="{{ resume.linkedin }}">{{ resume.linkedin }}</a>
+        </div>
+      </header>
+
+      <section class="col">
+        <h2>Profile</h2>
+        <div class="card">
+          {{ resume.summary|default:"Write a short professional summary here." }}
+        </div>
+
+        <h2>Experience</h2>
+        <div class="card">
+          {{ resume.experience|default:"Your work experience goes here." }}
+        </div>
+
+        <h2>Project</h2>
+        <div class="card">
+          {{ resume.projects|default:"Your project details go here." }}
+        </div>
+
+        <h2>Skill</h2>
+        <div class="card">
+          {{ resume.skills|default:"Your skills go here." }}
+          <div class="bar"><span></span></div>
+        </div>
+
+        <h2>Education</h2>
+        <div class="card">
+          {{ resume.education|default:"Your education details go here." }}
+        </div>
+
+        <h2>Certification</h2>
+        <div class="card">
+          {{ resume.certifications|default:"Your certifications go here." }}
+        </div>
+      </section>
+  </div>
+</body>
+</html>

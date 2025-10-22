@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Resume Builder</title>
+  <link rel="stylesheet" href="{% static 'main.css' %}">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-color: #f5f7fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .auth-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .auth-card h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+    .auth-card input {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      outline: none;
+    }
+    .auth-card input:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 2px rgba(99,102,241,0.2);
+    }
+    .auth-card button {
+      width: 100%;
+      padding: 0.75rem;
+      background: #6366f1;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .auth-card button:hover {
+      background: #4f46e5;
+    }
+    .auth-card p {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+    .auth-card a {
+      color: #6366f1;
+      text-decoration: none;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <!-- Logo -->
+  <div style="margin-bottom: 2rem;">
+    <svg class="h-8 w-auto" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:40px; width:auto;">
+      <rect x="0" y="8" width="24" height="24" rx="4" fill="#1a365d"/>
+      <rect x="28" y="12" width="16" height="16" rx="2" fill="#319795"/>
+      <text x="52" y="28" font-family="Poppins, sans-serif" font-size="18" font-weight="600" fill="#1a365d">SkillForge</text>
+    </svg>
+  </div>
+
+  <div class="auth-card">
+    <h2>Sign Up</h2>
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.username.errors }}
+      <input type="text" name="username" placeholder="Username" required>
+
+      {{ form.password1.errors }}
+      <input type="password" name="password1" placeholder="Password" required>
+
+      {{ form.password2.errors }}
+      <input type="password" name="password2" placeholder="Confirm Password" required>
+
+      <button type="submit">Create Account</button>
+    </form>
+    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+  </div>
+</body>
+</html>

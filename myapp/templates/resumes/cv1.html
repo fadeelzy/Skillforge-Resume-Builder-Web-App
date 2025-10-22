@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Builder-1</title>
+  <style>
+    body { font-family: "Georgia", serif; margin: 40px; background: #f4f7fb; }
+    .container { max-width: 900px; margin: auto; }
+    h1, h2 { color: #1a3c6e; }
+    h2 { border-bottom: 1px solid #ddd; padding-bottom: 5px; margin-top: 30px; }
+    p, li { font-size: 15px; line-height: 1.6; }
+    input, textarea { width: 100%; margin: 5px 0; padding: 8px; border: 1px solid #1a3c6e; border-radius: 5px; font-family: inherit; }
+    button { background: #1a3c6e; color: white; border: none; padding: 10px 20px; margin-top: 15px; cursor: pointer; font-weight: bold; border-radius: 5px; }
+    button:hover { background: #16345a; }
+    .resume-preview { background: white; padding: 30px; border: 2px solid #1a3c6e; border-radius: 10px; margin-top: 40px; }
+    .preview-header { display: flex; justify-content: space-between; align-items: center; }
+    .download-btn { background: #695467; margin-left: 10px; }
+    .download-btn:hover { background: #523850; }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+      <!-- Personal Info -->
+      <h2>Personal Information</h2>
+       <p>Email: {{ resume.email }}</p>
+       <p>Phone: {{ resume.phone }}</p>
+       <p>LinkedIn: {{ resume.linkedin }}</p>
+       <p>Address: {{ resume.address }}</p>
+      <!-- Summary -->
+      <h2>Executive Summary</h2>
+      <p name="summary" rows="6" placeholder="Summary">{{ resume.summary }}</p>
+
+      <!-- Experience -->
+      <h2>Professional Experience</h2>
+      <p name="experience" rows="10" placeholder="Experience">{{ resume.experience }}</p>
+
+      <!-- Education -->
+      <h2>Education</h2>
+      <p name="education" rows="6" placeholder="Education">{{ resume.education }}</p>
+
+      <!-- Skills -->
+      <h2>Skills</h2>
+      <ul>
+       {% for skill in resume.skills %}
+         <li>{{ skill }}</li>
+       {% endfor %}
+      </ul>
+  </div>
+</body>
+</html>

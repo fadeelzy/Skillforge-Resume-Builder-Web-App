@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Builder-19</title>
+  <style>
+    body { margin: 0; font-family: "Lora", serif; background: #f4f6f9; }
+    .resume { display: grid; grid-template-columns: 250px 1fr; max-width: 1000px; margin: 40px auto; background: #fff; box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
+    .sidebar { background: #34495e; color: black; padding: 30px; }
+    .sidebar h2 { font-size: 16px; border-bottom: 1px solid #eee; margin-top: 20px; padding-bottom: 4px; }
+    .main { padding: 40px; }
+    h1 { font-size: 19px; color: black; margin: 0; }
+    h2 { margin-top: 20px; color: gray; border-bottom: 2px solid #ddd; padding-bottom: 4px; }
+    input, textarea { width: 100%; padding: 6px; margin: 6px 0; border: 1px solid #ccc; border-radius: 4px; font-family: "Lora", serif; }
+    .save-btn { display: block; width: 160px; margin: 30px auto; padding: 10px 16px; text-align: center; background: #34495e; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 15px; }
+    .save-btn:hover { background: #2c3e50; }
+  </style>
+</head>
+<body>
+  <form class="resume">
+    <div class="sidebar">
+      <h2>Personal Informations</h2>
+      <h1><input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name"></h1>
+      <p>
+        <input type="text" name="role" value="{{ resume.job_title }}">
+        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email"><br>
+        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone"><br>
+        <input type="text" name="address" value="{{ resume.address}}" placeholder="Address"><br>
+      </p>
+
+      <h2>Education</h2>
+      <textarea name="education" placeholder="Add your education">{{ resume.education }}</textarea>
+
+      <h2>Skills</h2>
+      <textarea name="skills" placeholder="List your skills">{{ resume.skills }}</textarea>
+    </div>
+
+    <div class="main">
+      <h2>Research Statement</h2>
+      <textarea name="summary" placeholder="Write your research focus">{{ resume.summary }}</textarea>
+
+      <h2>Publications</h2>
+      <textarea name="publications" placeholder="List publications">{{ resume.publication }}</textarea>
+
+      <h2>Teaching</h2>
+      <textarea name="experience" placeholder="Teaching experience">{{ resume.experience }}</textarea>
+
+      <h2>Awards</h2>
+      <textarea name="awards" placeholder="Awards & scholarships">{{ resume.awards }}</textarea>
+    </div>
+  </form>
+
+</body>
+</html>

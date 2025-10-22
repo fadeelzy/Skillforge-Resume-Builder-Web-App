@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Builder-17</title>
+  <style>
+    :root {
+      --bg:#f4f4f9; --sidebar:#1e293b; --panel:#ffffff;
+      --accent:#0ea5e9; --ink:#0f172a; --muted:#64748b;
+      --border:#e2e8f0;
+    }
+    body {
+      margin: 0;
+      font-family: "Georgia", serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 100vh;
+    }
+    aside {
+      background: var(--sidebar);
+      color: #f1f5f9;
+      padding: 30px 20px;
+    }
+    aside h1 {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 0 0 10px;
+    }
+    aside p {
+      margin: 6px 0;
+      font-size: 14px;
+    }
+    main {
+      background: var(--panel);
+      padding: 40px;
+      border-left: 1px solid var(--border);
+    }
+    h2 {
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-top: 28px;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+    .section {
+      margin-bottom: 16px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+
+    <!-- Sidebar -->
+    <aside>
+      <h1>{{ resume.name|default:"Full Name" }}</h1>
+      <p>{{ resume.job_title|default:"Job Title" }}</p>
+      <p>{{ resume.email|default:"Email" }}</p>
+      <p>{{ resume.phone|default:"Phone" }}</p>
+      {% if resume.linkedin %}
+        <p><a href="{{ resume.linkedin }}" style="color:#0ea5e9">{{ resume.linkedin }}</a></p>
+      {% endif %}
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+      <h2>Education</h2>
+      <div class="section">{{ resume.education|default:"Degree, Institution, Year" }}</div>
+
+      <h2>Research Interests</h2>
+      <div class="section">{{ resume.summary|default:"Add your research focus here." }}</div>
+
+      <h2>Publications</h2>
+      <div class="section">{{ resume.publication|default:"List your publications here." }}</div>
+
+      <h2>Teaching Experience</h2>
+      <div class="section">{{ resume.experience|default:"List your teaching roles here." }}</div>
+
+      <h2>Awards & Scholarships</h2>
+      <div class="section">{{ resume.awards|default:"List your awards & scholarships" }}</div>
+    </main>
+
+  </div>
+</body>
+</html>

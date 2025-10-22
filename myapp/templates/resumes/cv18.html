@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ resume.name|default:"Academic CV" }}</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #fff; }
+    .resume { max-width: 850px; margin: 40px auto; padding: 40px; }
+    h1 { font-size: 28px; font-weight: bold; margin-bottom: 8px; }
+    .meta { margin-bottom: 20px; color: #555; font-size: 14px; }
+    .meta span { display: inline-block; margin-right: 15px; }
+    h2 { font-size: 18px; margin-top: 25px; border-bottom: 2px solid #ddd; color: #34495e; }
+    .section { margin-bottom: 20px; }
+    .section p { margin: 6px 0; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <div class="resume">
+
+    <!-- Name -->
+    <h1>Resume Builder-18</h1>
+
+    <!-- Contact Info -->
+    <div class="meta">
+      <span>{{ resume.email|default:"Email" }}</span>
+      <span>{{ resume.phone|default:"Phone" }}</span>
+      <span>{{ resume.address|default:"Address" }}</span>
+      {% if resume.linkedin %}
+        <span><a href="{{ resume.linkedin }}" target="_blank">{{ resume.linkedin }}</a></span>
+      {% endif %}
+    </div>
+
+    <!-- Education -->
+    <div class="section">
+      <h2>Education</h2>
+      <p>{{ resume.education|default:"List your education here." }}</p>
+    </div>
+
+    <!-- Publications -->
+    <div class="section">
+      <h2>Publications</h2>
+      <p>{{ resume.publication|default:"List your publications here." }}</p>
+    </div>
+
+    <!-- Research Projects -->
+    <div class="section">
+      <h2>Research Projects</h2>
+      <p>{{ resume.projects|default:"List your research projects here." }}</p>
+    </div>
+
+    <!-- Conferences -->
+    <div class="section">
+      <h2>Conferences</h2>
+      <p>{{ resume.conference|default:"List your conferences here." }}</p>
+    </div>
+
+  </div>
+</body>
+</html>
