@@ -5,7 +5,6 @@ __pycache__/
 *.pyd
 db.sqlite3
 media/
-staticfiles/
 .env
 .git
 .gitignore
