@@ -95,288 +95,289 @@
                 <div class="space-y-4">
                     {% if template.template_file == "resumes/cv1.html" %}
                           <!-- Fields for CV1-->
-                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
-                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
-                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
-                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
-                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
+                        <input type="text" name="name" value="{{ resume.name|default:''  }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title|default:''  }}" placeholder="Job Title" class="input" />
+                        <input type="email" name="email" value="{{ resume.email|default:''  }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone|default:'' }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address|default:''  }}" placeholder="Address" class="input" />
 
-                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
-                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
-                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
-                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary|default:''  }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience|default:''  }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education|default:''  }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills|default:''  }}</textarea>
                   
                     {% elif template.template_file == "resumes/cv2.html" %}
                           <!-- Fields for CV2-->
-                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
-                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
-                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
-                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
-                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
-                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
+                        <input type="text" name="name" value="{{ resume.name|default:''  }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title|default:''  }}" placeholder="Job Title" class="input" />
+                        <input type="email" name="email" value="{{ resume.email|default:''  }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone|default:''  }}" placeholder="Phone" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin|default:''  }}" placeholder="LinkedIn URL" class="input" />
+                        <input type="text" name="address" value="{{ resume.address|default:''  }}" placeholder="Address" class="input" />
 
-                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
-                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
-                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
-                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary|default:''  }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience|default:''  }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education|default:''  }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills|default:''  }}</textarea>
                   
                     {% elif template.template_file == "resumes/cv3.html" %}
                           <!-- Fields for CV3-->
-                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
-                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
-                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
-                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
-                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
-                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
-                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
-                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
-                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
-                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <input type="text" name="name" value="{{ resume.name|default:''  }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title|default:''  }}" placeholder="Job Title" class="input" />
+                        <input type="email" name="email" value="{{ resume.email|default:''  }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone|default:''  }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address|default:''  }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin|default:''  }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary|default:''  }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience|default:''  }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education|default:''  }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills|default:''  }}</textarea>
                   
                     {% elif template.template_file == "resumes/cv4.html" %}
                           <!-- Fields for CV4-->
-                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
-                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
-                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
-                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
-                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
-                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
-                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
-                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
-                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
-                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <input type="text" name="name" value="{{ resume.name|default:''  }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title|default:''  }}" placeholder="Job Title" class="input" />
+                        <input type="email" name="email" value="{{ resume.email|default:''  }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone|default:''  }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address|default:'' }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin|default:''  }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary|default:''  }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience|default:''  }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education|default:''  }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills|default:''  }}</textarea>
                   
                     {% elif template.template_file == "resumes/cv5.html" %}
                           <!-- Fields for CV5-->
-                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
-                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
-                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
-                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
-                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
-                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
-                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
-                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
-                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
-                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <input type="text" name="name" value="{{ resume.name|default:''  }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title|default:'' }}" placeholder="Job Title" class="input" />
+                        <input type="email" name="email" value="{{ resume.email|default:''  }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone|default:''  }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address|default:''  }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin|default:''  }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary|default:''  }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience|default:''  }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education|default:''  }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills|default:''  }}</textarea>
                   
                     {% elif template.template_file == "resumes/cv6.html" %}
                         <!-- fields for CV6-->
-                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
-                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
-                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
-                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
-                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
-                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
-                        <textarea name="publication" rows="10" placeholder="Publications" class="textarea">{{ resume.publication }}</textarea>
-                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
-                        <textarea name="awards" rows="10" placeholder="Awards" class="textarea">{{ resume.awards }}</textarea>
-                        <textarea name="conference" rows="10" placeholder="Conferences" class="textarea">{{ resume.conference }}</textarea>
+                        <input type="text" name="name" value="{{ resume.name|default:''  }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title|default:''  }}" placeholder="Job Title" class="input" />
+                        <input type="email" name="email" value="{{ resume.email|default:''  }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone|default:''  }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address|default:''  }}" placeholder="Address" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary|default:''  }}</textarea>
+                        <textarea name="publication" rows="10" placeholder="Publications" class="textarea">{{ resume.publication|default:''  }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education|default:''  }}</textarea>
+                        <textarea name="awards" rows="10" placeholder="Awards" class="textarea">{{ resume.awards|default:''  }}</textarea>
+                        <textarea name="conference" rows="10" placeholder="Conferences" class="textarea">{{ resume.conference|default:''  }}</textarea>
                    
                     {% elif template.template_file == "resumes/cv7.html" %}
                         <!-- Fields for CV7-->
-                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
-                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
-                        <input type="text" name="portfolio" value="{{ resume.portfolio }}" placeholder="PORTFOLIO URL" class="input" />
-                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
-                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
-                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
-                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
-                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
-                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
-                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
-                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <input type="text" name="name" value="{{ resume.name|default:''  }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title|default:''  }}" placeholder="Job Title" class="input" />
+                        <input type="text" name="portfolio" value="{{ resume.portfolio|default:''  }}" placeholder="PORTFOLIO URL" class="input" />
+                        <input type="email" name="email" value="{{ resume.email|default:''  }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone|default:''  }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address|default:''  }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin|default:''  }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary|default:''  }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience|default:''  }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education|default:''  }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills|default:''  }}</textarea>
                     
                     {% elif template.template_file == "resumes/cv8.html" %}
                         <!-- Fields for CV8-->
-                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
-                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
-                        <input type="text" name="portfolio" value="{{ resume.portfolio }}" placeholder="PORTFOLIO URL" class="input" />
-                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
-                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
-                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
-                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
-                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
-                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
-                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
-                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <input type="text" name="name" value="{{ resume.name|default:''  }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title|default:''  }}" placeholder="Job Title" class="input" />
+                        <input type="text" name="portfolio" value="{{ resume.portfolio|default:''  }}" placeholder="PORTFOLIO URL" class="input" />
+                        <input type="email" name="email" value="{{ resume.email|default:''  }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone|default:''  }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address|default:''  }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin|default:''  }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary|default:''  }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience|default:''  }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education|default:''  }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills|default:''  }}</textarea>
                     {% elif template.template_file == "resumes/cv9.html" %}
                         <!-- Fields for CV9-->
-                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
-                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
-                        <input type="text" name="portfolio" value="{{ resume.portfolio }}" placeholder="PORTFOLIO URL" class="input" />
-                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
-                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
-                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
-                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
-                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
-                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
-                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
-                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <input type="text" name="name" value="{{ resume.name|default:''  }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title|default:''  }}" placeholder="Job Title" class="input" />
+                        <input type="text" name="portfolio" value="{{ resume.portfolio|default:''  }}" placeholder="PORTFOLIO URL" class="input" />
+                        <input type="email" name="email" value="{{ resume.email|default:''  }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone|default:''  }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address|default:''  }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin|default:''  }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary|default:''  }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience|default:''  }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education|default:''  }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills|default:''  }}</textarea>
                     {% elif template.template_file == "resumes/cv10.html" %}
                         <!-- Fields for CV10-->
-                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
-                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
-                        <input type="text" name="github" value="{{ resume.github }}" placeholder="GITHUB URL" class="input" />
-                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
-                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
-                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
-                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
-                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
-                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
-                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
-                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <input type="text" name="name" value="{{ resume.name|default:''  }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title|default:''  }}" placeholder="Job Title" class="input" />
+                        <input type="text" name="github" value="{{ resume.github|default:''  }}" placeholder="GITHUB URL" class="input" />
+                        <input type="email" name="email" value="{{ resume.email|default:''  }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone|default:''  }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address|default:''  }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin|default:''  }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary|default:''  }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience|default:''  }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education|default:''  }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills|default:''  }}</textarea>
                      
                     {% elif template.template_file == "resumes/cv11.html" %}
                         <!-- Fields for CV11-->
-                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
-                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
-                        <input type="text" name="portfolio" value="{{ resume.portfolio }}" placeholder="PORTFOLIO URL" class="input" />
-                        <input type="text" name="github" value="{{ resume.github }}" placeholder="GITHUB URL" class="input" />
-                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
-                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
-                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
-                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
-                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
-                        <textarea name="tech_stack" rows="10" placeholder="Tech Stack" class="textarea">{{ resume.tech_stack }}</textarea>
-                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
-                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
-                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
-                        <textarea name="projects" rows="10" placeholder="Projects" class="textarea">{{ resume.projects }}</textarea><textarea name="skills" rows="4" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
-                        <textarea name="certifications" rows="10" placeholder="Certifications" class="textarea">{{ resume.certifications }}</textarea>
-                        <textarea name="highlights" rows="10" placeholder="Highlights" class="textarea">{{ resume.highlights }}</textarea>
+                        <input type="text" name="name" value="{{ resume.name|default:''  }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title|default:''  }}" placeholder="Job Title" class="input" />
+                        <input type="text" name="portfolio" value="{{ resume.portfolio|default:''  }}" placeholder="PORTFOLIO URL" class="input" />
+                        <input type="text" name="github" value="{{ resume.github|default:''  }}" placeholder="GITHUB URL" class="input" />
+                        <input type="email" name="email" value="{{ resume.email|default:''  }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone|default:''  }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address|default:''  }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin|default:''  }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary|default:''  }}</textarea>
+                        <textarea name="tech_stack" rows="10" placeholder="Tech Stack" class="textarea">{{ resume.tech_stack|default:''  }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills|default:''  }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience|default:''  }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education|default:''  }}</textarea>
+                        <textarea name="projects" rows="10" placeholder="Projects" class="textarea">{{ resume.projects|default:''  }}</textarea><textarea name="skills" rows="4" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <textarea name="certifications" rows="10" placeholder="Certifications" class="textarea">{{ resume.certifications|default:''  }}</textarea>
+                        <textarea name="highlights" rows="10" placeholder="Highlights" class="textarea">{{ resume.highlights|default:''  }}</textarea>
                     {% elif template.template_file == "resumes/cv12.html" %}
                         <!-- Fields for CV12-->
-                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
-                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
-                        <input type="text" name="github" value="{{ resume.github }}" placeholder="GITHUB URL" class="input" />
-                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
-                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
-                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
-                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
-                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
-                        <textarea name="tech_stack" rows="10" placeholder="Tech Stack" class="textarea">{{ resume.tech_stack }}</textarea>
-                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
-                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
-                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
-                        <textarea name="projects" rows="10" placeholder="Projects" class="textarea">{{ resume.projects }}</textarea><textarea name="skills" rows="4" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
-                        <textarea name="certifications" rows="10" placeholder="Certifications" class="textarea">{{ resume.certifications }}</textarea>
-                        <textarea name="highlights" rows="10" placeholder="Highlights" class="textarea">{{ resume.highlights }}</textarea>
+                        <input type="text" name="name" value="{{ resume.name|default:''  }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title|default:''  }}" placeholder="Job Title" class="input" />
+                        <input type="text" name="github" value="{{ resume.github|default:''  }}" placeholder="GITHUB URL" class="input" />
+                        <input type="email" name="email" value="{{ resume.email|default:''  }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone|default:''  }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address|default:''  }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin|default:''  }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary|default:''  }}</textarea>
+                        <textarea name="tech_stack" rows="10" placeholder="Tech Stack" class="textarea">{{ resume.tech_stack|default:''  }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience|default:''  }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills|default:''  }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education|default:''  }}</textarea>
+                        <textarea name="projects" rows="10" placeholder="Projects" class="textarea">{{ resume.projects|default:''  }}</textarea><textarea name="skills" rows="4" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <textarea name="certifications" rows="10" placeholder="Certifications" class="textarea">{{ resume.certifications|default:''  }}</textarea>
+                        <textarea name="highlights" rows="10" placeholder="Highlights" class="textarea">{{ resume.highlights|default:''  }}</textarea>
                     {% elif template.template_file == "resumes/cv13.html" %}
                         <!-- Fields for CV13-->
-                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
-                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
-                        <input type="text" name="github" value="{{ resume.github }}" placeholder="GITHUB URL" class="input" />
-                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
-                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
-                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
-                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
-                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
-                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
-                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
-                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
-                        <textarea name="projects" rows="10" placeholder="Projects" class="textarea">{{ resume.projects }}</textarea><textarea name="skills" rows="4" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
-                        <textarea name="certifications" rows="10" placeholder="Certifications" class="textarea">{{ resume.certifications }}</textarea>
+                        <input type="text" name="name" value="{{ resume.name|default:''  }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title|default:''  }}" placeholder="Job Title" class="input" />
+                        <input type="text" name="github" value="{{ resume.github|default:''  }}" placeholder="GITHUB URL" class="input" />
+                        <input type="email" name="email" value="{{ resume.email|default:''  }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone|default:''  }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address|default:''  }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin|default:''  }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary|default:''  }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience|default:''  }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills|default:''  }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education|default:''  }}</textarea>
+                        <textarea name="projects" rows="10" placeholder="Projects" class="textarea">{{ resume.projects|default:''  }}</textarea><textarea name="skills" rows="4" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <textarea name="certifications" rows="10" placeholder="Certifications" class="textarea">{{ resume.certifications|default:''  }}</textarea>
                     {% elif template.template_file == "resumes/cv14.html" %}
                         <!-- Fields for CV14-->
-                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
-                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
-                        <input type="text" name="portfolio" value="{{ resume.portfolio }}" placeholder="PORTFOLIO URL" class="input" />
-                        <input type="text" name="github" value="{{ resume.github }}" placeholder="GITHUB URL" class="input" />
-                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
-                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
-                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
-                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
-                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
-                        <textarea name="tech_stack" rows="10" placeholder="Tech Stack" class="textarea">{{ resume.tech_stack }}</textarea>
-                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
-                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
-                        <textarea name="projects" rows="10" placeholder="Projects" class="textarea">{{ resume.projects }}</textarea><textarea name="skills" rows="4" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
-                        <textarea name="certifications" rows="10" placeholder="Certifications" class="textarea">{{ resume.certifications }}</textarea>
-                        <textarea name="highlights" rows="10" placeholder="Highlights" class="textarea">{{ resume.highlights }}</textarea>
-                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <input type="text" name="name" value="{{ resume.name|default:''  }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title|default:''  }}" placeholder="Job Title" class="input" />
+                        <input type="text" name="portfolio" value="{{ resume.portfolio|default:''  }}" placeholder="PORTFOLIO URL" class="input" />
+                        <input type="text" name="github" value="{{ resume.github|default:''  }}" placeholder="GITHUB URL" class="input" />
+                        <input type="email" name="email" value="{{ resume.email|default:''  }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone|default:''  }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address|default:''  }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin|default:''  }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary|default:''  }}</textarea>
+                        <textarea name="tech_stack" rows="10" placeholder="Tech Stack" class="textarea">{{ resume.tech_stack|default:''  }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience|default:''  }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education|default:''  }}</textarea>
+                        <textarea name="projects" rows="10" placeholder="Projects" class="textarea">{{ resume.projects|default:''  }}</textarea><textarea name="skills" rows="4" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <textarea name="certifications" rows="10" placeholder="Certifications" class="textarea">{{ resume.certifications|default:''  }}</textarea>
+                        <textarea name="highlights" rows="10" placeholder="Highlights" class="textarea">{{ resume.highlights|default:''  }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills|default:''  }}</textarea>
                      
                     {% elif template.template_file == "resumes/cv15.html" %}
                         <!-- Fields for CV15-->
-                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
-                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
-                        <input type="text" name="github" value="{{ resume.github }}" placeholder="GITHUB URL" class="input" />
-                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
-                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
-                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
-                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
-                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
-                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
-                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
-                        <textarea name="projects" rows="10" placeholder="Projects" class="textarea">{{ resume.projects }}</textarea><textarea name="skills" rows="4" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
-                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
-                        <textarea name="certifications" rows="10" placeholder="Certifications" class="textarea">{{ resume.certifications }}</textarea>
+                        <input type="text" name="name" value="{{ resume.name|default:''  }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title|default:''  }}" placeholder="Job Title" class="input" />
+                        <input type="text" name="github" value="{{ resume.github|default:''  }}" placeholder="GITHUB URL" class="input" />
+                        <input type="email" name="email" value="{{ resume.email|default:''  }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone|default:''  }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address|default:''  }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin|default:''  }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary|default:''  }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience|default:''  }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education|default:''  }}</textarea>
+                        <textarea name="projects" rows="10" placeholder="Projects" class="textarea">{{ resume.projects|default:''  }}</textarea><textarea name="skills" rows="4" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills|default:''  }}</textarea>
+                        <textarea name="certifications" rows="10" placeholder="Certifications" class="textarea">{{ resume.certifications|default:''  }}</textarea>
                     
                     {% elif template.template_file == "resumes/cv16.html" %}
                         <!-- Fields for CV16-->
-                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
-                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
-                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
-                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
-                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
-                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
-                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
-                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
-                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
-                        <textarea name="awards" rows="10" placeholder="Awards" class="textarea">{{ resume.awards }}</textarea>
-                        <textarea name="publication" rows="10" placeholder="Publications" class="textarea">{{ resume.publication }}</textarea>
+                        <input type="text" name="name" value="{{ resume.name|default:''  }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title|default:''  }}" placeholder="Job Title" class="input" />
+                        <input type="email" name="email" value="{{ resume.email|default:''  }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone|default:''  }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address|default:''  }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin|default:''  }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary|default:''  }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience|default:''  }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education|default:''  }}</textarea>
+                        <textarea name="awards" rows="10" placeholder="Awards" class="textarea">{{ resume.awards|default:''  }}</textarea>
+                        <textarea name="publication" rows="10" placeholder="Publications" class="textarea">{{ resume.publication|default:''  }}</textarea>
                     
                     {% elif template.template_file == "resumes/cv17.html" %}
                         <!-- Fields for CV17-->
-                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
-                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
-                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
-                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
-                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
-                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
-                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
-                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience }}</textarea>
-                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
-                        <textarea name="awards" rows="10" placeholder="Awards" class="textarea">{{ resume.awards }}</textarea>
-                        <textarea name="publication" rows="10" placeholder="Publications" class="textarea">{{ resume.publication }}</textarea>
+                        <input type="text" name="name" value="{{ resume.name|default:''  }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title|default:''  }}" placeholder="Job Title" class="input" />
+                        <input type="email" name="email" value="{{ resume.email|default:''  }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone|default:''  }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address|default:''  }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin|default:''  }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary|default:''  }}</textarea>
+                        <textarea name="experience" rows="10" placeholder="Experience" class="textarea">{{ resume.experience|default:''  }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education|default:''  }}</textarea>
+                        <textarea name="awards" rows="10" placeholder="Awards" class="textarea">{{ resume.awards|default:''  }}</textarea>
+                        <textarea name="publication" rows="10" placeholder="Publications" class="textarea">{{ resume.publication|default:''  }}</textarea>
                     {% elif template.template_file == "resumes/cv18.html" %}
                         <!-- Fields for CV18-->
-                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
-                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
-                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
-                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
-                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
-                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
-                        <textarea name="projects" rows="10" placeholder="Projects" class="textarea">{{ resume.projects }}</textarea>
-                        <textarea name="conference" rows="10" placeholder="Conferences" class="textarea">{{ resume.conference }}</textarea>
-                        <textarea name="awards" rows="10" placeholder="Awards" class="textarea">{{ resume.awards }}</textarea>
-                        <textarea name="publication" rows="10" placeholder="Publications" class="textarea">{{ resume.publication }}</textarea>
+                        <input type="text" name="name" value="{{ resume.name|default:''  }}" placeholder="Full Name" class="input" />
+                        <input type="email" name="email" value="{{ resume.email|default:''  }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone|default:''  }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address|default:''  }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin|default:''  }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education|default:''  }}</textarea>
+                        <textarea name="projects" rows="10" placeholder="Projects" class="textarea">{{ resume.projects|default:''  }}</textarea>
+                        <textarea name="conference" rows="10" placeholder="Conferences" class="textarea">{{ resume.conference|default:''  }}</textarea>
+                        <textarea name="awards" rows="10" placeholder="Awards" class="textarea">{{ resume.awards|default:''  }}</textarea>
+                        <textarea name="publication" rows="10" placeholder="Publications" class="textarea">{{ resume.publication|default:''  }}</textarea>
                     
                     {% elif template.template_file == "resumes/cv19.html" %}
                         <!-- Fields for CV19-->
-                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
-                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
-                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
-                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
-                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
-                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
-                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
-                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills }}</textarea>
-                        <textarea name="publication" rows="10" placeholder="Publications" class="textarea">{{ resume.publication }}</textarea>
-                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
-                        <textarea name="awards" rows="10" placeholder="Awards" class="textarea">{{ resume.awards }}</textarea>
+                        <input type="text" name="name" value="{{ resume.name|default:''  }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title|default:''  }}" placeholder="Job Title" class="input" />
+                        <input type="email" name="email" value="{{ resume.email|default:''  }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone|default:''  }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address|default:''  }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin|default:''  }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary|default:''  }}</textarea>
+                        <textarea name="skills" rows="10" placeholder="Skills (comma separated)" class="textarea">{{ resume.skills|default:''  }}</textarea>
+                        <textarea name="publication" rows="10" placeholder="Publications" class="textarea">{{ resume.publication|default:''  }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education|default:''  }}</textarea>
+                        <textarea name="awards" rows="10" placeholder="Awards" class="textarea">{{ resume.awards|default:''  }}</textarea>
+
                     {% elif template.template_file == "resumes/cv20.html" %}
                         <!-- Fields for CV20-->
-                        <input type="text" name="name" value="{{ resume.name }}" placeholder="Full Name" class="input" />
-                        <input type="text" name="job_title" value="{{ resume.job_title }}" placeholder="Job Title" class="input" />
-                        <input type="email" name="email" value="{{ resume.email }}" placeholder="Email" class="input" />
-                        <input type="text" name="phone" value="{{ resume.phone }}" placeholder="Phone" class="input" />
-                        <input type="text" name="address" value="{{ resume.address }}" placeholder="Address" class="input" />
-                        <input type="text" name="linkedin" value="{{ resume.linkedin }}" placeholder="LinkedIn URL" class="input" />
-                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary }}</textarea>
-                        <textarea name="publication" rows="10" placeholder="Publications" class="textarea">{{ resume.publication }}</textarea>
-                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education }}</textarea>
-                        <textarea name="awards" rows="10" placeholder="Awards" class="textarea">{{ resume.awards }}</textarea>
-                        <textarea name="conference" rows="10" placeholder="Conferences" class="textarea">{{ resume.conference }}</textarea>
+                        <input type="text" name="name" value="{{ resume.name|default:''  }}" placeholder="Full Name" class="input" />
+                        <input type="text" name="job_title" value="{{ resume.job_title|default:''  }}" placeholder="Job Title" class="input" />
+                        <input type="email" name="email" value="{{ resume.email|default:''  }}" placeholder="Email" class="input" />
+                        <input type="text" name="phone" value="{{ resume.phone|default:''  }}" placeholder="Phone" class="input" />
+                        <input type="text" name="address" value="{{ resume.address|default:''  }}" placeholder="Address" class="input" />
+                        <input type="text" name="linkedin" value="{{ resume.linkedin|default:''  }}" placeholder="LinkedIn URL" class="input" />
+                        <textarea name="summary" rows="10" placeholder="Summary" class="textarea">{{ resume.summary|default:''  }}</textarea>
+                        <textarea name="publication" rows="10" placeholder="Publications" class="textarea">{{ resume.publication|default:''  }}</textarea>
+                        <textarea name="education" rows="10" placeholder="Education" class="textarea">{{ resume.education|default:''  }}</textarea>
+                        <textarea name="awards" rows="10" placeholder="Awards" class="textarea">{{ resume.awards|default:''  }}</textarea>
+                        <textarea name="conference" rows="10" placeholder="Conferences" class="textarea">{{ resume.conference|default:''  }}</textarea>
 
                     {% endif %}
                     <div class="flex space-x-4">
