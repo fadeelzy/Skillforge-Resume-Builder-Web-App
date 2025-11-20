@@ -55,7 +55,7 @@ Frontend	HTML5, TailwindCSS
 
 Backend	Django (Python)
 
-Database	SQLite (default Django DB)
+Database - Postgresql (Aiven)
 
 PDF Export	WeasyPrint
 
